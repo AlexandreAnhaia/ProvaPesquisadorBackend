@@ -10,7 +10,13 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPessoa } from 'app/shared/model/pessoa.model';
-import { getEntities, getSearchEntitiesByName } from './pessoa.reducer';
+import {
+  getEntities,
+  getSearchEntitiesByCpf,
+  getSearchEntitiesByDataNascimneto,
+  getSearchEntitiesByEmail,
+  getSearchEntitiesByName,
+} from './pessoa.reducer';
 
 export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
@@ -18,7 +24,7 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
   const [cpfSearch, setCpfSearch] = useState(null);
   const [emailSearch, setEmailSearch] = useState(null);
   const [dataNascimentoSearch, setDataNascimnetoSearch] = useState(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('Nome');
 
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'name'), props.location.search)
@@ -90,15 +96,15 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
   };
 
   const refreshEntitiesFilteredByCpf = value => {
-    dispatch(getSearchEntitiesByName(value));
+    dispatch(getSearchEntitiesByCpf(value));
   };
 
   const refreshEntitiesFilteredByEmail = value => {
-    dispatch(getSearchEntitiesByName(value));
+    dispatch(getSearchEntitiesByEmail(value));
   };
 
   const refreshEntitiesFilteredByDataNascimento = value => {
-    dispatch(getSearchEntitiesByName(value));
+    dispatch(getSearchEntitiesByDataNascimneto(value));
   };
 
   const searchByName = value => {
@@ -123,7 +129,7 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
         <Translate contentKey="provaPesquisadorApp.pessoa.home.title">Pessoas</Translate>
         <div className="d-flex justify-content-center">
           <FormGroup>
-            <label>Pesquisar por: </label>
+            <label>Filtrar por: </label>
             <Input
               onChange={e => {
                 setSearch(e.target.value);
@@ -131,6 +137,7 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
               type="select"
               name="select"
               id="exampleSelect"
+              defaultValue={'Nome'}
             >
               <option>Nome</option>
               <option>Cpf</option>

@@ -16,7 +16,10 @@ const initialState: EntityState<IPessoa> = {
 };
 
 const apiUrl = 'api/pessoas';
-const apiUrlSearch = 'api/pessoas-search-name/';
+const apiUrlSearchByName = 'api/pessoas-search-name/';
+const apiUrlSearchByCpf = 'api/pessoas-search-cpf/';
+const apiUrlSearchByEmail = 'api/pessoas-search-email/';
+const apiUrlSearchByDataNascimento = 'api/pessoas-search-datanascimento/';
 
 // Actions
 
@@ -26,22 +29,22 @@ export const getEntities = createAsyncThunk('pessoa/fetch_entity_list', async ({
 });
 
 export const getSearchEntitiesByName = createAsyncThunk('pessoa/fetch_entity_list', async (name: string) => {
-  const requestUrl = `${apiUrlSearch}${name ? `?name=${name}` : ''}`;
+  const requestUrl = `${apiUrlSearchByName}${name ? `?name=${name}` : ''}`;
   return axios.get<IPessoa[]>(requestUrl);
 });
 
 export const getSearchEntitiesByCpf = createAsyncThunk('pessoa/fetch_entity_list', async (cpf: string) => {
-  const requestUrl = `${apiUrlSearch}${cpf ? `?cpf=${cpf}` : ''}`;
+  const requestUrl = `${apiUrlSearchByCpf}${cpf ? `?cpf=${cpf}` : ''}`;
   return axios.get<IPessoa[]>(requestUrl);
 });
 
 export const getSearchEntitiesByEmail = createAsyncThunk('pessoa/fetch_entity_list', async (email: string) => {
-  const requestUrl = `${apiUrlSearch}${email ? `?email=${email}` : ''}`;
+  const requestUrl = `${apiUrlSearchByEmail}${email ? `?email=${email}` : ''}`;
   return axios.get<IPessoa[]>(requestUrl);
 });
 
 export const getSearchEntitiesByDataNascimneto = createAsyncThunk('pessoa/fetch_entity_list', async (birthdate: string) => {
-  const requestUrl = `${apiUrlSearch}${birthdate ? `?birthdate=${birthdate}` : ''}`;
+  const requestUrl = `${apiUrlSearchByDataNascimento}${birthdate ? `?birthdate=${birthdate}` : ''}`;
   return axios.get<IPessoa[]>(requestUrl);
 });
 

@@ -61,13 +61,23 @@ public class PessoaQueryService extends QueryService<Pessoa> {
     }
 
     /**
-     * Return a {@link List} of {@link PessoaDTO} which matches the criteria from the database.
+     * Return a {@link List} of {@link PessoaDTO} which matches the name from the database.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
     public Page<Pessoa> findAllByName(String name, Pageable pageable) {
         log.debug("find by criteria : {}");
         return pessoaRepository.findAllByName(name, pageable);
+    }
+
+    /**
+     * Return a {@link List} of {@link PessoaDTO} which matches the cpf from the database.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Pessoa> findAllByCpf(String cpf, Pageable pageable) {
+        log.debug("find by criteria : {}");
+        return pessoaRepository.findAllByCpf(cpf, pageable);
     }
 
     /**
