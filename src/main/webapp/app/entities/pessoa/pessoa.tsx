@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { byteSize, getSortState, JhiItemCount, JhiPagination, openFile, TextFormat, Translate } from 'react-jhipster';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, FormGroup, Input, Table } from 'reactstrap';
+import { Button, Col, FormGroup, Input, Row, Table } from 'reactstrap';
 
 import { APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -126,33 +126,38 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
     <div>
       <h2 id="pessoa-heading" data-cy="PessoaHeading">
         <Translate contentKey="provaPesquisadorApp.pessoa.home.title">Pessoas</Translate>
-        <div className="d-flex justify-content-center">
-          <FormGroup>
-            <label>Filtrar por: </label>
-            <Input
-              onChange={e => {
-                setSearch(e.target.value);
-              }}
-              type="select"
-              name="select"
-              id="exampleSelect"
-              defaultValue={'Nome'}
-            >
-              <option>Nome</option>
-              <option>Cpf</option>
-              <option>Email</option>
-              <option>Data de Nascimento</option>
-            </Input>
-            <br />
-            <Input
-              size={22}
-              className="search-input"
-              placeholder="Pesquise baseado no filtro"
-              onChange={e => {
-                searchByName(e.target.value);
-              }}
-            />
-          </FormGroup>
+      </h2>
+      <h2>
+        <div className="d-flex justify-content-left">
+          <Row>
+            <Col md="8">
+              <label>Filtrar por: </label>
+              <Input
+                onChange={e => {
+                  setSearch(e.target.value);
+                }}
+                type="select"
+                name="select"
+                id="exampleSelect"
+                defaultValue={'Nome'}
+              >
+                <option>Nome</option>
+                <option>Cpf</option>
+                <option>Email</option>
+                <option>Data de Nascimento</option>
+              </Input>
+            </Col>
+            <Col md="8">
+              <Input
+                size={22}
+                className="search-input"
+                placeholder="Pesquise baseado no filtro"
+                onChange={e => {
+                  searchByName(e.target.value);
+                }}
+              />
+            </Col>
+          </Row>
         </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
