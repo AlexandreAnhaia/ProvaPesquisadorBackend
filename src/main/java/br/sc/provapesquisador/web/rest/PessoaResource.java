@@ -9,6 +9,8 @@ import br.sc.provapesquisador.service.dto.PessoaDTO;
 import br.sc.provapesquisador.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -219,6 +221,35 @@ public class PessoaResource {
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
             return ResponseEntity.ok().headers(headers).body(page.getContent());
         }
+        Page<Pessoa> page = pessoaQueryService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /pessoas} : get all the pessoas by birthDate.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pessoas in body.
+     */
+    @GetMapping("/pessoas-search-birthdate/")
+    public ResponseEntity<List<Pessoa>> getAllPessoasByBirthDate(
+        @RequestParam(required = false) String birthDate,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Pessoas by criteria: {}");
+        if (birthDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            System.out.println("@@@@@@@@@@@@" + birthDate);
+            LocalDate localDate = LocalDate.parse(birthDate);
+            if (localDate != null) {
+                System.out.println(localDate);
+                Page<Pessoa> page = pessoaQueryService.findAllByBirthDate(localDate, pageable);
+                HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+                return ResponseEntity.ok().headers(headers).body(page.getContent());
+            }
+        }
+        System.out.println("@@@@@@@@@@@@@@@@");
         Page<Pessoa> page = pessoaQueryService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

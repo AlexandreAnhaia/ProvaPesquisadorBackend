@@ -1,9 +1,9 @@
+import { createAsyncThunk, isFulfilled, isPending } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { createAsyncThunk, isFulfilled, isPending, isRejected } from '@reduxjs/toolkit';
 
+import { defaultValue, IPessoa } from 'app/shared/model/pessoa.model';
+import { createEntitySlice, EntityState, IQueryParams, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
 import { cleanEntity } from 'app/shared/util/entity-utils';
-import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
-import { IPessoa, defaultValue } from 'app/shared/model/pessoa.model';
 
 const initialState: EntityState<IPessoa> = {
   loading: false,
@@ -19,7 +19,7 @@ const apiUrl = 'api/pessoas';
 const apiUrlSearchByName = 'api/pessoas-search-name/';
 const apiUrlSearchByCpf = 'api/pessoas-search-cpf/';
 const apiUrlSearchByEmail = 'api/pessoas-search-email/';
-const apiUrlSearchByDataNascimento = 'api/pessoas-search-datanascimento/';
+const apiUrlSearchByDataNascimento = 'api/pessoas-search-birthdate/';
 
 // Actions
 

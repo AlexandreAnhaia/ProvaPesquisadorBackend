@@ -6,6 +6,7 @@ import br.sc.provapesquisador.repository.PessoaRepository;
 import br.sc.provapesquisador.service.criteria.PessoaCriteria;
 import br.sc.provapesquisador.service.dto.PessoaDTO;
 import br.sc.provapesquisador.service.mapper.PessoaMapper;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
@@ -88,6 +89,17 @@ public class PessoaQueryService extends QueryService<Pessoa> {
     public Page<Pessoa> findAllByEmail(String email, Pageable pageable) {
         log.debug("find by criteria : {}");
         return pessoaRepository.findAllByEmail(email, pageable);
+    }
+
+    /**
+     * Return a {@link List} of {@link PessoaDTO} which matches the birthDate from the database.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Pessoa> findAllByBirthDate(LocalDate birthDate, Pageable pageable) {
+        log.debug("find by criteria : {}");
+        System.out.println(birthDate);
+        return pessoaRepository.findAllByBirthDate(birthDate, pageable);
     }
 
     /**
