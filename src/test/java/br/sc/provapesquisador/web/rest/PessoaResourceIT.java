@@ -15,9 +15,11 @@ import br.sc.provapesquisador.service.mapper.PessoaMapper;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
+import liquibase.pro.packaged.P;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,8 @@ class PessoaResourceIT {
     private static final String ENTITY_API_URL = "/api/pessoas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
     private static final String ENTITY_API_URL_GETBYNAME = "/api/pessoas-search-name/?name=A";
+    private static final String ENTITY_API_URL_GETBYCPF = "/api/pessoas-search-cpf/?cpf=AAA";
+    private static final String ENTITY_API_URL_GETBYEMAIL = "/api/pessoas-search-email/?email=AAA";
 
     private static Random random = new Random();
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
@@ -720,6 +724,127 @@ class PessoaResourceIT {
         List<Pessoa> pessoaList = pessoaRepository.findAll();
         //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
         assertThat(pessoaList).hasSize(databaseSizeAfterUpdate);
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartNameWithAIsEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYNAME)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
+        assertThat(pessoaList.get(0).getName() == pessoa.getName());
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartNameWithAIsNotEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        Pessoa pessoa1 = new Pessoa()
+            .name(UPDATED_NAME)
+            .cpf(UPDATED_CPF)
+            .email(UPDATED_EMAIL)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
+            .birthDate(UPDATED_BIRTH_DATE)
+            .excluded(UPDATED_EXCLUDED);
+        pessoaRepository.saveAndFlush(pessoa1);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYNAME)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+
+        assertThat(pessoaList.size() == 1);
+        Pessoa pessoaFinal = new Pessoa();
+        for (int i = 0; i < pessoaList.size(); i++) {
+            if (pessoaList.get(i).getName().equals(pessoa1.getName())) {
+                pessoaFinal = pessoaList.get(i);
+            }
+        }
+
+        assertThat(pessoaFinal.getName() != pessoa.getName());
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartCpfWithAIsEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYCPF)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
+        assertThat(pessoaList.get(0).getCpf() == pessoa.getCpf());
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartCpfWithAIsNotEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        Pessoa pessoa1 = new Pessoa()
+            .name(UPDATED_NAME)
+            .cpf(UPDATED_CPF)
+            .email(UPDATED_EMAIL)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
+            .birthDate(UPDATED_BIRTH_DATE)
+            .excluded(UPDATED_EXCLUDED);
+        pessoaRepository.saveAndFlush(pessoa1);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYCPF)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
+        assertThat(pessoaList.size() == 1);
+        Pessoa pessoaFinal = new Pessoa();
+        for (int i = 0; i < pessoaList.size(); i++) {
+            if (pessoaList.get(i).getCpf().equals(pessoa1.getCpf())) {
+                pessoaFinal = pessoaList.get(i);
+            }
+        }
+
+        assertThat(pessoaFinal.getCpf() != pessoa.getCpf());
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartEmailWithAIsEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYEMAIL)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
+        assertThat(pessoaList.size() == 1);
+        assertThat(pessoaList.get(0).getEmail() == pessoa.getEmail());
+    }
+
+    @Test
+    @Transactional
+    void getExistingPessoaStartEmailWithAIsNotEqual() throws Exception {
+        pessoaRepository.saveAndFlush(pessoa);
+
+        Pessoa pessoa1 = new Pessoa()
+            .name(UPDATED_NAME)
+            .cpf(UPDATED_CPF)
+            .email(UPDATED_EMAIL)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
+            .birthDate(UPDATED_BIRTH_DATE)
+            .excluded(UPDATED_EXCLUDED);
+        pessoaRepository.saveAndFlush(pessoa1);
+
+        restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYEMAIL)).andExpect(status().isOk());
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
+        assertThat(pessoaList.size() == 1);
+        Pessoa pessoaFinal = new Pessoa();
+        for (int i = 0; i < pessoaList.size(); i++) {
+            if (pessoaList.get(i).getEmail().equals(pessoa1.getEmail())) {
+                pessoaFinal = pessoaList.get(i);
+            }
+        }
+
+        assertThat(pessoaFinal.getEmail() != pessoa.getEmail());
     }
 
     @Test
