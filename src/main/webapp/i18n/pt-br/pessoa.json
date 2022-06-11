@@ -6,7 +6,8 @@
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Pessoa",
         "createOrEditLabel": "Criar ou editar Pessoa",
-        "notFound": "Nenhum Pessoa encontrado"
+        "notFound": "Nenhum Pessoa encontrado",
+        "pesquisaNome": "Pesquise por nome"
       },
       "created": "Um novo Pessoa foi criado com o identificador {{ param }}",
       "updated": "Um Pessoa foi atualizado com o identificador {{ param }}",
@@ -18,11 +19,11 @@
         "title": "Pessoa"
       },
       "id": "ID",
-      "name": "Name",
+      "name": "Nome",
       "cpf": "Cpf",
       "email": "Email",
-      "avatar": "Avatar",
-      "birthDate": "Birth Date",
+      "avatar": "Foto",
+      "birthDate": "Data de Nascimento",
       "excluded": "Excluded"
     }
   }

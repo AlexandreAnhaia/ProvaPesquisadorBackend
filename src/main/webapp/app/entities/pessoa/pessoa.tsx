@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { Button, FormGroup, Input, Table } from 'reactstrap';
+import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount, translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -10,10 +10,15 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPessoa } from 'app/shared/model/pessoa.model';
-import { getEntities } from './pessoa.reducer';
+import { getEntities, getSearchEntitiesByName } from './pessoa.reducer';
 
 export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
+  const [nameSearch, setNameSearch] = useState(null);
+  const [cpfSearch, setCpfSearch] = useState(null);
+  const [emailSearch, setEmailSearch] = useState(null);
+  const [dataNascimentoSearch, setDataNascimnetoSearch] = useState(null);
+  const [search, setSearch] = useState('');
 
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(props.location, ITEMS_PER_PAGE, 'name'), props.location.search)
@@ -80,10 +85,68 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
 
   const { match } = props;
 
+  const refreshEntitiesFilteredByName = value => {
+    dispatch(getSearchEntitiesByName(value));
+  };
+
+  const refreshEntitiesFilteredByCpf = value => {
+    dispatch(getSearchEntitiesByName(value));
+  };
+
+  const refreshEntitiesFilteredByEmail = value => {
+    dispatch(getSearchEntitiesByName(value));
+  };
+
+  const refreshEntitiesFilteredByDataNascimento = value => {
+    dispatch(getSearchEntitiesByName(value));
+  };
+
+  const searchByName = value => {
+    if (search === 'Nome') {
+      setNameSearch(value);
+      refreshEntitiesFilteredByName(value);
+    } else if (search === 'Cpf') {
+      setCpfSearch(value);
+      refreshEntitiesFilteredByCpf(value);
+    } else if (search === 'Email') {
+      setEmailSearch(value);
+      refreshEntitiesFilteredByEmail(value);
+    } else {
+      setDataNascimnetoSearch(value);
+      refreshEntitiesFilteredByDataNascimento(value);
+    }
+  };
+
   return (
     <div>
       <h2 id="pessoa-heading" data-cy="PessoaHeading">
         <Translate contentKey="provaPesquisadorApp.pessoa.home.title">Pessoas</Translate>
+        <div className="d-flex justify-content-center">
+          <FormGroup>
+            <label>Pesquisar por: </label>
+            <Input
+              onChange={e => {
+                setSearch(e.target.value);
+              }}
+              type="select"
+              name="select"
+              id="exampleSelect"
+            >
+              <option>Nome</option>
+              <option>Cpf</option>
+              <option>Email</option>
+              <option>Data de Nascimento</option>
+            </Input>
+            <br />
+            <Input
+              className="search-input"
+              placeholder={translate('provaPesquisadorApp.pessoa.home.pesquisaNome')}
+              onChange={e => {
+                searchByName(e.target.value);
+              }}
+            />
+          </FormGroup>
+        </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}

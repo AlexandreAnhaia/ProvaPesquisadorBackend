@@ -159,6 +159,28 @@ public class PessoaResource {
     //    }
 
     /**
+     * {@code GET  /pessoas} : get all the pessoas by name.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pessoas in body.
+     */
+    @GetMapping("/pessoas-search-name/")
+    public ResponseEntity<List<Pessoa>> getAllPessoasByName(
+        @RequestParam(required = false) String name,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Pessoas by criteria: {}");
+        if (name != null) {
+            Page<Pessoa> page = pessoaQueryService.findAllByName(name, pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        }
+        Page<Pessoa> page = pessoaQueryService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /pessoas} : get all the pessoas.
      *
      * @param pageable the pagination information.
