@@ -146,8 +146,9 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
             </Input>
             <br />
             <Input
+              size={22}
               className="search-input"
-              placeholder={translate('provaPesquisadorApp.pessoa.home.pesquisaNome')}
+              placeholder="Pesquise baseado no filtro"
               onChange={e => {
                 searchByName(e.target.value);
               }}
@@ -183,11 +184,11 @@ export const Pessoa = (props: RouteComponentProps<{ url: string }>) => {
                 <th className="hand" onClick={sort('email')}>
                   <Translate contentKey="provaPesquisadorApp.pessoa.email">Email</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('avatar')}>
-                  <Translate contentKey="provaPesquisadorApp.pessoa.avatar">Avatar</Translate> <FontAwesomeIcon icon="sort" />
+                <th>
+                  <Translate contentKey="provaPesquisadorApp.pessoa.avatar">Avatar</Translate>
                 </th>
-                <th className="hand" onClick={sort('birthDate')}>
-                  <Translate contentKey="provaPesquisadorApp.pessoa.birthDate">Birth Date</Translate> <FontAwesomeIcon icon="sort" />
+                <th>
+                  <Translate contentKey="provaPesquisadorApp.pessoa.birthDate">Birth Date</Translate>
                 </th>
                 {/* <th className="hand" onClick={sort('excluded')}>
                   <Translate contentKey="provaPesquisadorApp.pessoa.excluded">Excluded</Translate> <FontAwesomeIcon icon="sort" />

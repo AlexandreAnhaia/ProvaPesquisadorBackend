@@ -81,6 +81,16 @@ public class PessoaQueryService extends QueryService<Pessoa> {
     }
 
     /**
+     * Return a {@link List} of {@link PessoaDTO} which matches the email from the database.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Pessoa> findAllByEmail(String email, Pageable pageable) {
+        log.debug("find by criteria : {}");
+        return pessoaRepository.findAllByEmail(email, pageable);
+    }
+
+    /**
      * Return a {@link Page} of {@link PessoaDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.

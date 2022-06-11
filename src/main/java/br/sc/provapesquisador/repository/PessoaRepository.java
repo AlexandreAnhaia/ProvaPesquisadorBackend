@@ -21,4 +21,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>, JpaSpecif
 
     @Query(value = "SELECT * FROM pessoa as p where p.cpf LIKE %:cpf% and p.excluded = false", nativeQuery = true)
     Page<Pessoa> findAllByCpf(@Param("cpf") String cpf, Pageable pageable);
+
+    @Query(value = "SELECT * FROM pessoa as p where p.email LIKE %:email% and p.excluded = false", nativeQuery = true)
+    Page<Pessoa> findAllByEmail(@Param("email") String email, Pageable pageable);
 }

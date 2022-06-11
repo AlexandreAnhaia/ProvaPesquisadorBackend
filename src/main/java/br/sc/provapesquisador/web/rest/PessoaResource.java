@@ -181,7 +181,7 @@ public class PessoaResource {
     }
 
     /**
-     * {@code GET  /pessoas} : get all the pessoas by name.
+     * {@code GET  /pessoas} : get all the pessoas by cpf.
      *
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pessoas in body.
@@ -194,6 +194,28 @@ public class PessoaResource {
         log.debug("REST request to get Pessoas by criteria: {}");
         if (cpf != null) {
             Page<Pessoa> page = pessoaQueryService.findAllByCpf(cpf, pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        }
+        Page<Pessoa> page = pessoaQueryService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /pessoas} : get all the pessoas by email.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pessoas in body.
+     */
+    @GetMapping("/pessoas-search-email/")
+    public ResponseEntity<List<Pessoa>> getAllPessoasByEmail(
+        @RequestParam(required = false) String email,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Pessoas by criteria: {}");
+        if (email != null) {
+            Page<Pessoa> page = pessoaQueryService.findAllByEmail(email, pageable);
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
             return ResponseEntity.ok().headers(headers).body(page.getContent());
         }
