@@ -113,6 +113,7 @@ export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 name="cpf"
                 data-cy="cpf"
                 type="text"
+                disabled={!isNew}
                 onChange={e => setStateValue(e.target.value)}
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
