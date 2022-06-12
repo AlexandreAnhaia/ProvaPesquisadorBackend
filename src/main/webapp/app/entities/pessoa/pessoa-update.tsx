@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField, isEmail } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { isEmail, Translate, translate, ValidatedBlobField, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { Button, Col, Row } from 'reactstrap';
 
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IPessoa } from 'app/shared/model/pessoa.model';
-import { getEntity, updateEntity, createEntity, reset } from './pessoa.reducer';
+import { checkExists } from './pessoa-reducer-custom';
+import { createEntity, getEntity, reset, updateEntity } from './pessoa.reducer';
 
 export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
+  const [cpfState, setCpfState] = useState(null);
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
@@ -20,6 +19,7 @@ export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const loading = useAppSelector(state => state.pessoa.loading);
   const updating = useAppSelector(state => state.pessoa.updating);
   const updateSuccess = useAppSelector(state => state.pessoa.updateSuccess);
+  const cpfExists = useAppSelector(state => state.pessoaReducerCustom.exists);
   const handleClose = () => {
     props.history.push('/pessoa' + props.location.search);
   };
@@ -33,10 +33,22 @@ export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
   }, []);
 
   useEffect(() => {
+    if (cpfState) {
+      dispatch(checkExists(cpfState));
+    }
+  }, [cpfState]);
+
+  useEffect(() => {
     if (updateSuccess) {
       handleClose();
     }
   }, [updateSuccess]);
+
+  const setStateValue = value => {
+    setTimeout(() => {
+      setCpfState(value);
+    });
+  };
 
   const saveEntity = values => {
     const entity = {
@@ -100,8 +112,10 @@ export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 name="cpf"
                 data-cy="cpf"
                 type="text"
+                onChange={e => setStateValue(e.target.value)}
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
+                  validate: () => !cpfExists || translate('provaPesquisadorApp.pessoa.home.cpfExists'),
                 }}
               />
               <ValidatedField

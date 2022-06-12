@@ -8,7 +8,8 @@
         "createOrEditLabel": "Criar ou editar Pessoa",
         "notFound": "Nenhum Pessoa encontrado",
         "pesquisaNome": "Pesquise por nome",
-        "invalid": "E-mail inválido."
+        "invalid": "E-mail inválido.",
+        "cpfExists": "O cpf já existe."
       },
       "created": "Um novo Pessoa foi criado com o identificador {{ param }}",
       "updated": "Um Pessoa foi atualizado com o identificador {{ param }}",

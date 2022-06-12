@@ -4,6 +4,7 @@ import br.sc.provapesquisador.domain.Pessoa;
 import br.sc.provapesquisador.repository.PessoaRepository;
 import br.sc.provapesquisador.service.dto.PessoaDTO;
 import br.sc.provapesquisador.service.mapper.PessoaMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,5 +109,17 @@ public class PessoaService {
     public void delete(Long id) {
         log.debug("Request to delete Pessoa : {}", id);
         pessoaRepository.deleteById(id);
+    }
+
+    public boolean checkExistsCpf(String cpf) {
+        List<Pessoa> pessoas = pessoaRepository.findAll();
+        if (pessoas.size() != 0 && pessoas != null) {
+            for (Pessoa pessoa : pessoas) {
+                if (cpf.equals(pessoa.getCpf())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

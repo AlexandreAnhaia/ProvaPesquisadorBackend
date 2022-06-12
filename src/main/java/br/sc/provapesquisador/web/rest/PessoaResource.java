@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -308,5 +309,11 @@ public class PessoaResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/check-exists/{cpf}")
+    public ResponseEntity<Boolean> checkCpfExists(@PathVariable String cpf) {
+        boolean exists = pessoaService.checkExistsCpf(cpf);
+        return ResponseEntity.ok(exists);
     }
 }
