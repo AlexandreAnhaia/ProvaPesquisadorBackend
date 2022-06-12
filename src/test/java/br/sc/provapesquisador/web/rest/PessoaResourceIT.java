@@ -261,414 +261,6 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.excluded").value(DEFAULT_EXCLUDED.booleanValue()));
     }
 
-    //    @Test
-    //    @Transactional
-    //    void getPessoasByIdFiltering() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        Long id = pessoa.getId();
-    //
-    //        defaultPessoaShouldBeFound("id.equals=" + id);
-    //        defaultPessoaShouldNotBeFound("id.notEquals=" + id);
-    //
-    //        defaultPessoaShouldBeFound("id.greaterThanOrEqual=" + id);
-    //        defaultPessoaShouldNotBeFound("id.greaterThan=" + id);
-    //
-    //        defaultPessoaShouldBeFound("id.lessThanOrEqual=" + id);
-    //        defaultPessoaShouldNotBeFound("id.lessThan=" + id);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameIsEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name equals to DEFAULT_NAME
-    //        defaultPessoaShouldBeFound("name.equals=" + DEFAULT_NAME);
-    //
-    //        // Get all the pessoaList where name equals to UPDATED_NAME
-    //        defaultPessoaShouldNotBeFound("name.equals=" + UPDATED_NAME);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameIsNotEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name not equals to DEFAULT_NAME
-    //        defaultPessoaShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
-    //
-    //        // Get all the pessoaList where name not equals to UPDATED_NAME
-    //        defaultPessoaShouldBeFound("name.notEquals=" + UPDATED_NAME);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameIsInShouldWork() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name in DEFAULT_NAME or UPDATED_NAME
-    //        defaultPessoaShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
-    //
-    //        // Get all the pessoaList where name equals to UPDATED_NAME
-    //        defaultPessoaShouldNotBeFound("name.in=" + UPDATED_NAME);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameIsNullOrNotNull() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name is not null
-    //        defaultPessoaShouldBeFound("name.specified=true");
-    //
-    //        // Get all the pessoaList where name is null
-    //        defaultPessoaShouldNotBeFound("name.specified=false");
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name contains DEFAULT_NAME
-    //        defaultPessoaShouldBeFound("name.contains=" + DEFAULT_NAME);
-    //
-    //        // Get all the pessoaList where name contains UPDATED_NAME
-    //        defaultPessoaShouldNotBeFound("name.contains=" + UPDATED_NAME);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByNameNotContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where name does not contain DEFAULT_NAME
-    //        defaultPessoaShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
-    //
-    //        // Get all the pessoaList where name does not contain UPDATED_NAME
-    //        defaultPessoaShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfIsEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf equals to DEFAULT_CPF
-    //        defaultPessoaShouldBeFound("cpf.equals=" + DEFAULT_CPF);
-    //
-    //        // Get all the pessoaList where cpf equals to UPDATED_CPF
-    //        defaultPessoaShouldNotBeFound("cpf.equals=" + UPDATED_CPF);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfIsNotEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf not equals to DEFAULT_CPF
-    //        defaultPessoaShouldNotBeFound("cpf.notEquals=" + DEFAULT_CPF);
-    //
-    //        // Get all the pessoaList where cpf not equals to UPDATED_CPF
-    //        defaultPessoaShouldBeFound("cpf.notEquals=" + UPDATED_CPF);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfIsInShouldWork() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf in DEFAULT_CPF or UPDATED_CPF
-    //        defaultPessoaShouldBeFound("cpf.in=" + DEFAULT_CPF + "," + UPDATED_CPF);
-    //
-    //        // Get all the pessoaList where cpf equals to UPDATED_CPF
-    //        defaultPessoaShouldNotBeFound("cpf.in=" + UPDATED_CPF);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfIsNullOrNotNull() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf is not null
-    //        defaultPessoaShouldBeFound("cpf.specified=true");
-    //
-    //        // Get all the pessoaList where cpf is null
-    //        defaultPessoaShouldNotBeFound("cpf.specified=false");
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf contains DEFAULT_CPF
-    //        defaultPessoaShouldBeFound("cpf.contains=" + DEFAULT_CPF);
-    //
-    //        // Get all the pessoaList where cpf contains UPDATED_CPF
-    //        defaultPessoaShouldNotBeFound("cpf.contains=" + UPDATED_CPF);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByCpfNotContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where cpf does not contain DEFAULT_CPF
-    //        defaultPessoaShouldNotBeFound("cpf.doesNotContain=" + DEFAULT_CPF);
-    //
-    //        // Get all the pessoaList where cpf does not contain UPDATED_CPF
-    //        defaultPessoaShouldBeFound("cpf.doesNotContain=" + UPDATED_CPF);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailIsEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email equals to DEFAULT_EMAIL
-    //        defaultPessoaShouldBeFound("email.equals=" + DEFAULT_EMAIL);
-    //
-    //        // Get all the pessoaList where email equals to UPDATED_EMAIL
-    //        defaultPessoaShouldNotBeFound("email.equals=" + UPDATED_EMAIL);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailIsNotEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email not equals to DEFAULT_EMAIL
-    //        defaultPessoaShouldNotBeFound("email.notEquals=" + DEFAULT_EMAIL);
-    //
-    //        // Get all the pessoaList where email not equals to UPDATED_EMAIL
-    //        defaultPessoaShouldBeFound("email.notEquals=" + UPDATED_EMAIL);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailIsInShouldWork() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email in DEFAULT_EMAIL or UPDATED_EMAIL
-    //        defaultPessoaShouldBeFound("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL);
-    //
-    //        // Get all the pessoaList where email equals to UPDATED_EMAIL
-    //        defaultPessoaShouldNotBeFound("email.in=" + UPDATED_EMAIL);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailIsNullOrNotNull() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email is not null
-    //        defaultPessoaShouldBeFound("email.specified=true");
-    //
-    //        // Get all the pessoaList where email is null
-    //        defaultPessoaShouldNotBeFound("email.specified=false");
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email contains DEFAULT_EMAIL
-    //        defaultPessoaShouldBeFound("email.contains=" + DEFAULT_EMAIL);
-    //
-    //        // Get all the pessoaList where email contains UPDATED_EMAIL
-    //        defaultPessoaShouldNotBeFound("email.contains=" + UPDATED_EMAIL);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByEmailNotContainsSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where email does not contain DEFAULT_EMAIL
-    //        defaultPessoaShouldNotBeFound("email.doesNotContain=" + DEFAULT_EMAIL);
-    //
-    //        // Get all the pessoaList where email does not contain UPDATED_EMAIL
-    //        defaultPessoaShouldBeFound("email.doesNotContain=" + UPDATED_EMAIL);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate equals to DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.equals=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate equals to UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.equals=" + UPDATED_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsNotEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate not equals to DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.notEquals=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate not equals to UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.notEquals=" + UPDATED_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsInShouldWork() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate in DEFAULT_BIRTH_DATE or UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.in=" + DEFAULT_BIRTH_DATE + "," + UPDATED_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate equals to UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.in=" + UPDATED_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsNullOrNotNull() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate is not null
-    //        defaultPessoaShouldBeFound("birthDate.specified=true");
-    //
-    //        // Get all the pessoaList where birthDate is null
-    //        defaultPessoaShouldNotBeFound("birthDate.specified=false");
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsGreaterThanOrEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate is greater than or equal to DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.greaterThanOrEqual=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate is greater than or equal to UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.greaterThanOrEqual=" + SMALLER_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsLessThanOrEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate is less than or equal to DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.lessThanOrEqual=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate is less than or equal to SMALLER_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.lessThanOrEqual=" + SMALLER_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsLessThanSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate is less than DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.lessThan=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate is less than UPDATED_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.lessThan=" + UPDATED_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByBirthDateIsGreaterThanSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where birthDate is greater than DEFAULT_BIRTH_DATE
-    //        defaultPessoaShouldNotBeFound("birthDate.greaterThan=" + DEFAULT_BIRTH_DATE);
-    //
-    //        // Get all the pessoaList where birthDate is greater than SMALLER_BIRTH_DATE
-    //        defaultPessoaShouldBeFound("birthDate.greaterThan=" + SMALLER_BIRTH_DATE);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByExcludedIsEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where excluded equals to DEFAULT_EXCLUDED
-    //        defaultPessoaShouldBeFound("excluded.equals=" + DEFAULT_EXCLUDED);
-    //
-    //        // Get all the pessoaList where excluded equals to UPDATED_EXCLUDED
-    //        defaultPessoaShouldNotBeFound("excluded.equals=" + UPDATED_EXCLUDED);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByExcludedIsNotEqualToSomething() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where excluded not equals to DEFAULT_EXCLUDED
-    //        defaultPessoaShouldNotBeFound("excluded.notEquals=" + DEFAULT_EXCLUDED);
-    //
-    //        // Get all the pessoaList where excluded not equals to UPDATED_EXCLUDED
-    //        defaultPessoaShouldBeFound("excluded.notEquals=" + UPDATED_EXCLUDED);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByExcludedIsInShouldWork() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where excluded in DEFAULT_EXCLUDED or UPDATED_EXCLUDED
-    //        defaultPessoaShouldBeFound("excluded.in=" + DEFAULT_EXCLUDED + "," + UPDATED_EXCLUDED);
-    //
-    //        // Get all the pessoaList where excluded equals to UPDATED_EXCLUDED
-    //        defaultPessoaShouldNotBeFound("excluded.in=" + UPDATED_EXCLUDED);
-    //    }
-
-    //    @Test
-    //    @Transactional
-    //    void getAllPessoasByExcludedIsNullOrNotNull() throws Exception {
-    //        // Initialize the database
-    //        pessoaRepository.saveAndFlush(pessoa);
-    //
-    //        // Get all the pessoaList where excluded is not null
-    //        defaultPessoaShouldBeFound("excluded.specified=true");
-    //
-    //        // Get all the pessoaList where excluded is null
-    //        defaultPessoaShouldNotBeFound("excluded.specified=false");
-    //    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -713,6 +305,10 @@ class PessoaResourceIT {
             .andExpect(content().string("0"));
     }
 
+    /**
+     * Teste para verificar o salvamento e o getExistingPessoaStartNameWithA.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartNameWithA() throws Exception {
@@ -726,6 +322,10 @@ class PessoaResourceIT {
         assertThat(pessoaList).hasSize(databaseSizeAfterUpdate);
     }
 
+    /**
+     * Teste para verificar se o getExistingPessoaStartNameWithA está retornando a pessoa correta.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartNameWithAIsEqual() throws Exception {
@@ -737,6 +337,10 @@ class PessoaResourceIT {
         assertThat(pessoaList.get(0).getName() == pessoa.getName());
     }
 
+    /**
+     * Teste para verificar se o getExistingPessoaStartNameWithA está retornando a pessoa correta e forçando a comparação com um outro objeto.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartNameWithAIsNotEqual() throws Exception {
@@ -766,6 +370,10 @@ class PessoaResourceIT {
         assertThat(pessoaFinal.getName() != pessoa.getName());
     }
 
+    /**
+     * Teste para verificar o salvamento e o getExistingPessoaStartCpfWithA.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartCpfWithAIsEqual() throws Exception {
@@ -777,6 +385,10 @@ class PessoaResourceIT {
         assertThat(pessoaList.get(0).getCpf() == pessoa.getCpf());
     }
 
+    /**
+     * Teste para verificar se o getExistingPessoaStartCpfWithA está retornando a pessoa correta e forçando a comparação com um outro objeto.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartCpfWithAIsNotEqual() throws Exception {
@@ -806,6 +418,10 @@ class PessoaResourceIT {
         assertThat(pessoaFinal.getCpf() != pessoa.getCpf());
     }
 
+    /**
+     * Teste para verificar o salvamento e o getExistingPessoaStartEmailWithA com o mesmo objeto.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartEmailWithAIsEqual() throws Exception {
@@ -818,6 +434,10 @@ class PessoaResourceIT {
         assertThat(pessoaList.get(0).getEmail() == pessoa.getEmail());
     }
 
+    /**
+     * Teste para verificar se o getExistingPessoaStartEmailWithA está retornando a pessoa correta e forçando a comparação com um outro objeto.
+     * @throws Exception
+     */
     @Test
     @Transactional
     void getExistingPessoaStartEmailWithAIsNotEqual() throws Exception {
