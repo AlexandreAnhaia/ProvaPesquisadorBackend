@@ -354,20 +354,11 @@ class PessoaResourceIT {
             .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
             .birthDate(UPDATED_BIRTH_DATE)
             .excluded(UPDATED_EXCLUDED);
-        pessoaRepository.saveAndFlush(pessoa1);
 
         restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYNAME)).andExpect(status().isOk());
         List<Pessoa> pessoaList = pessoaRepository.findAll();
-
         assertThat(pessoaList.size() == 1);
-        Pessoa pessoaFinal = new Pessoa();
-        for (int i = 0; i < pessoaList.size(); i++) {
-            if (pessoaList.get(i).getName().equals(pessoa1.getName())) {
-                pessoaFinal = pessoaList.get(i);
-            }
-        }
-
-        assertThat(pessoaFinal.getName() != pessoa.getName());
+        assertThat(pessoa1.getName() != pessoaList.get(0).getName());
     }
 
     /**
@@ -402,20 +393,11 @@ class PessoaResourceIT {
             .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
             .birthDate(UPDATED_BIRTH_DATE)
             .excluded(UPDATED_EXCLUDED);
-        pessoaRepository.saveAndFlush(pessoa1);
 
         restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYCPF)).andExpect(status().isOk());
         List<Pessoa> pessoaList = pessoaRepository.findAll();
-        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
         assertThat(pessoaList.size() == 1);
-        Pessoa pessoaFinal = new Pessoa();
-        for (int i = 0; i < pessoaList.size(); i++) {
-            if (pessoaList.get(i).getCpf().equals(pessoa1.getCpf())) {
-                pessoaFinal = pessoaList.get(i);
-            }
-        }
-
-        assertThat(pessoaFinal.getCpf() != pessoa.getCpf());
+        assertThat(pessoa1.getCpf() != pessoaList.get(0).getCpf());
     }
 
     /**
@@ -451,20 +433,11 @@ class PessoaResourceIT {
             .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
             .birthDate(UPDATED_BIRTH_DATE)
             .excluded(UPDATED_EXCLUDED);
-        pessoaRepository.saveAndFlush(pessoa1);
 
         restPessoaMockMvc.perform(get(ENTITY_API_URL_GETBYEMAIL)).andExpect(status().isOk());
         List<Pessoa> pessoaList = pessoaRepository.findAll();
-        //        Pessoa pessoaList = pessoaRepository.findById(pessoa.getId());
         assertThat(pessoaList.size() == 1);
-        Pessoa pessoaFinal = new Pessoa();
-        for (int i = 0; i < pessoaList.size(); i++) {
-            if (pessoaList.get(i).getEmail().equals(pessoa1.getEmail())) {
-                pessoaFinal = pessoaList.get(i);
-            }
-        }
-
-        assertThat(pessoaFinal.getEmail() != pessoa.getEmail());
+        assertThat(pessoa1.getEmail() != pessoaList.get(0).getEmail());
     }
 
     @Test
