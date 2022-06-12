@@ -9,7 +9,8 @@
         "notFound": "Nenhum Pessoa encontrado",
         "pesquisaNome": "Pesquise por nome",
         "invalid": "E-mail inválido.",
-        "cpfExists": "O cpf já existe."
+        "cpfExists": "O cpf já existe.",
+        "cpfPattern": "Formato necessário XXX.XXX.XXX-XX"
       },
       "created": "Um novo Pessoa foi criado com o identificador {{ param }}",
       "updated": "Um Pessoa foi atualizado com o identificador {{ param }}",

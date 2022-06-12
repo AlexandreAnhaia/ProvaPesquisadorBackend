@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { checkExists } from './pessoa-reducer-custom';
 import { createEntity, getEntity, reset, updateEntity } from './pessoa.reducer';
+import { REGEX_CPF } from 'app/config/constants';
 
 export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
@@ -116,6 +117,7 @@ export const PessoaUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                   validate: () => !cpfExists || translate('provaPesquisadorApp.pessoa.home.cpfExists'),
+                  pattern: { value: REGEX_CPF, message: translate('provaPesquisadorApp.pessoa.home.cpfPattern') },
                 }}
               />
               <ValidatedField
